@@ -54,20 +54,22 @@ Dim sJSON As String, sFolder As String, sJSONFileName As String
   
    ' Get the list of domains considered as spam
    
-   sJSONFileName = sFolder & "\spam.json"
+   sJSONFileName = sFolder & "spam.json"
    If cHelper.FileExists(sJSONFileName) Then
       sJSON = cHelper.GetFileContent(sJSONFileName)
       Set JSONSpam = JSONLib.parse(sJSON)
+      Debug.Print "= " & sJSONFileName & " contains " & JSONSpam.Count & " entries ="
    Else
       Debug.Print "File " & sJSONFileName & " not found"
    End If
    
    ' Get the list of domains for which a specific category should be applied (a category in Outlook allow to group emails)
    
-   sJSONFileName = sFolder & "\categories.json"
+   sJSONFileName = sFolder & "categories.json"
    If cHelper.FileExists(sJSONFileName) Then
       sJSON = cHelper.GetFileContent(sJSONFileName)
       Set JSONCategories = JSONLib.parse(sJSON)
+      Debug.Print "= " & sJSONFileName & " contains " & JSONCategories.Count & " entries ="
    Else
       Debug.Print "File " & sJSONFileName & " not found"
    End If
