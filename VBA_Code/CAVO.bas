@@ -5,6 +5,9 @@ Attribute VB_Name = "CAVO"
 ' Date   : 17 August 2016
 ' Aim    : Provide quick functionnalities for
 '
+' GitHub repo : https://github.com/cavo789/outlook_vba/
+' Read online documentation : https://github.com/cavo789/outlook_vba/blob/master/README.md
+'
 '   1. Kill mails coming from bad sender domain
 '   2. Set email's category to predefined ones based on, here too, sender domain
 '
@@ -42,7 +45,7 @@ Dim sJSON As String, sFolder As String, sJSONFileName As String
    If (Right(sFolder, 1) <> "\") Then sFolder = sFolder & "\"
    
    If Not (cHelper.FolderExists(sFolder)) Then
-      sFolder = cHelper.GetWindowsSpecialFolders("MyDocuments") & "OutlookVBA\"
+      sFolder = cHelper.GetWindowsSpecialFolders("MyDocuments") & "outlook_vba\"
       If Not (cHelper.FolderExists(sFolder)) Then
          cHelper.MakeFolder (sFolder)
          Debug.Print "Folder " & sFolder & " created"
@@ -101,7 +104,7 @@ Dim bContinue As Boolean, bHasBeenChanged As Boolean
          Set oMailItem = o
 
          sMailSenderAddress = oMailItem.SenderEmailAddress
-         sMailSenderDomain = Mid(sMailAddress, InStrRev(sMailAddress, "@") + 1)
+         sMailSenderDomain = Mid(sMailSenderAddress, InStrRev(sMailSenderAddress, "@") + 1)
 
          bContinue = True
 
@@ -203,7 +206,7 @@ End Sub
 ' -                                                                                     -
 ' ---------------------------------------------------------------------------------------
 
-Sub InspectInbox()
+Sub InspecteMails()
 
    Call Initialize
 
