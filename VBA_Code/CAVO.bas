@@ -115,12 +115,17 @@ Dim bContinue As Boolean, bHasBeenChanged As Boolean
          For i = 1 To k
             
             ' JSONSpam.Item is either a full email address like spammer@hotmail.ru or a domain like @hotmail.ru
-            
+
             If ((sMailSenderAddress = JSONSpam.Item(i)) Or _
-                (Left(JSONSpam.Item(i), 1) = "@") And (sMailSenderDomain = JSONSpam.Item(i))) Then
+                (Left(JSONSpam.Item(i), 1) = "@") And ("@" & sMailSenderDomain = JSONSpam.Item(i))) Then
                Debug.Print "eMail from @" & sMailSenderDomain & " detected; kill it.  Mail subject was " & Chr(34) & oMailItem.Subject & Chr(34)
+               
+               On Error Resume Next
                oMailItem.UserProperties.Add "DeleteMeNow", olText
                oMailItem.Save
+               If Err.Number <> 0 Then Err.Clear
+               On Error GoTo 0
+               
                oMailItem.Delete
                bContinue = False
                Exit For
@@ -137,7 +142,7 @@ Dim bContinue As Boolean, bHasBeenChanged As Boolean
                ' JSONCategories.Items()(i) = categories to set for that domain
 
                If ((sMailSenderAddress = JSONCategories.keys()(i - 1)) Or _
-                  (Left(JSONCategories.keys()(i - 1), 1) = "@") And (sMailSenderDomain = JSONCategories.keys()(i - 1))) Then
+                  (Left(JSONCategories.keys()(i - 1), 1) = "@") And ("@" & sMailSenderDomain = JSONCategories.keys()(i - 1))) Then
                   
                   If (oMailItem.Categories <> JSONCategories.Items()(i - 1)) Then
                      Debug.Print "Set category to " & Chr(34) & JSONCategories.Items()(i - 1) & Chr(34) & " for email coming from " & sMailSenderAddress
