@@ -1,7 +1,14 @@
-# outlook_vba
+# vba_outlook_fight_against_spam
+
+**No more maintained, the code was too slow**
+Take a look to the [vba_outlook_CreateRuleSendToTrash](https://github.com/cavo789/vba_outlook_CreateRuleSendToTrash) repository 
+
+---
+
 VBA code to enhance the use of Outlook and mainly fight against spam, automatically assign emails to categories, ...
 
 ## How to install ?
+
 1. Download the content of this repository on your hard disk (f.i. C:\Outlook_vba).
 2. In Outlook, press ALT-F11 so the Visual Basic Editor (VBE) will be opened.
 3. You'll see at the top left the explorer pane.  Right click under the root entry (first entry in the treeview) and select "Import" from the contextual menu.
@@ -23,18 +30,21 @@ Now, add a button on the ribbon to be able to start the macro when you wish to :
 Back in the Outlook interface, you should see the new buttons.
 
 ## How to use ?
+
 If you've add a button in the ribbon, it's easy : open a folder with mails (f.i. the Inbox folder) and click on the button.   It isn't more difficult than that.
 
 The macro will scan every emails in that folder (subfolders included) and will apply the defined rules.
 
 ## How to configure ?
+
 Open your file explorer and go to the C:\Outlook_vba folder (where you've unzip this repository).  You'll find json files.  At time of writing this guide, there are two files.
 
 Go to your "MyDocuments" folder (if you don't know where this folder is located, click on the Start button and type "%USERPROFILE%\My Documents\", Windows will then open that special folder) and create a folder called "outlook_vba".  Copy the two json files there.
 
 When this is done; with a text editor like Notepad open these files.
 
-###spam.json
+### spam.json
+
 This file contains the rules for identifying a spam email.
 
 ```
@@ -54,7 +64,8 @@ This file contains the rules for identifying a spam email.
 You can specify a full email address (like robots@altavista.com) or a domain name (like @zoho.com).
 The InspecteMails macro will extract the sender email and will compare this info to this list.  If the sender email or sender domain name is mentionned in the spam.json file, the mail will be considered as a spam and will be deleted from your mail folder.
 
-###categories.json
+### categories.json
+
 This file contains the rules for identifying a which Outlook category should be assigned to which emails.
 
 ```
